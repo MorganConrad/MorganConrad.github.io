@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset=utf-8>
+    <title>ES6 Generators for the Nosy</title>
+    <meta name="description" content="Iconic Sail and Sailboats of the Salish Sea">
+    <meta name="keywords" content = "Salish Sea, schooner, ketch, yawl">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="apple-touch-icon" sizes="192x192" href="/assets/img/mebyAudi2.png">
+    <link rel="icon" sizes="192x192" href="/assets/img/mebyAudi2.png">
+
+    <link rel="stylesheet" href="/assets/elusive_2.0.0/css/elusive-icons.min.css">
+    <!--link rel="stylesheet" href="/assets/css/octicons.css" media="screen" title="no title"-->
+
+    <style type="text/css" title="layout" media="screen">
+        @import url("/assets/css/mc.css");
+        @import url("/assets/css/prism.css");
+    </style>
+    
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-90305082-1', 'auto');
+  ga('send', 'pageview');
+
+  </script>
+</head>
+
+<body>
+
+   <header class="mainheader">
+
+      <script src='/assets/js/prism.js'></script>
+
+      <a href="/index.html"><img src="/assets/logo/morganconrad.svg" alt="Home" title="Home"/></a>
+
+      <div class = "dropdown right">
+         <img src="/assets/svg/menu.svg" class="dropdown-btn" alt="Menu" title="Menu" height="40"/>
+         <div class="dropdown-content">
+            <a href="/index.html">Home</a>
+            <a href="/index.html#portfolio">Portfolio</a>
+            <a href="/index.html#about">About</a>
+            <a href="/index.html#contact">Contact</a>
+            <a href="/posts.html">Blog</a>
+         </div>
+      </div>
+   </header>
+
+   <main>
+
+      <!--div class="tags">Tags:
+      <span><a href="/posts.html">all</a></span>
+         <span><a href="/posts.html?tag=JavaScript, ES6, generators">JavaScript, ES6, generators</a></span>
+   </div-->
+
+      <article id="article">
+         <h1>ES6 Generators for the Nosy</h1>
+         <div>By Morgan Conrad</div>
+         <br>
+
+         <div>
+            <p>JavaScript ES6 adds a new construct called a <em>generator</em>.  They appear function-like, but don&#39;t be fooled, there are a lot of differences.  In fact, the more you know the less like a &quot;function&quot; they seem.</p>
+<h4 id="notes">Notes</h4>
+<ol>
+<li>Links prefaced by the &quot;experiment&quot; icon <img src="/assets/svg/beaker.svg" alt="experiment" title="" /> indicate &quot;less frequently asked questions&quot; and are covered in the <a href="#Appendix">Appendix</a>.</li>
+<li>In the &quot;printouts&quot;, in many cases newlines have been replaced by spaces for brevity.</li>
+</ol>
+
+<h3 id="syntax">Syntax</h3>
+<h4 id="declaration">Declaration</h4>
+<p>The declaration line for a generator has a *, which can be either</p>
+<ul>
+<li><code>function *foo() { ... }</code></li>
+<li><code>function* foo() { ... }</code></li>
+<li><code>function * foo() { ... }</code></li>
+<li><code>function*foo() { ... }</code></li>
+</ul>
+<p><a href="https://www.amazon.com/You-Dont-Know-JS-Beyond/dp/1491904240">Kyle Simpson</a> and others make a good case to version 1 over version 2, so I&#39;ll use that.  Versions 3 and 4 are just silly.</p>
+<h4 id="yield">yield</h4>
+<p>Within a generator, (<img src="/assets/svg/beaker.svg" alt="experiment" title="" /><a href="#yield-in-function"> how about in a normal function?</a>) one can use a new keyword, <code>yield</code>.  This allows for <em>two way</em> communication (more later).  A &quot;typical&quot; syntax is:</p>
+<p><code>var incoming = yield outgoing;</code></p>
+<p>As in a <code>return</code> statement, <strong>outgoing</strong> is optional, but for a generator it really should be present almost all the time.<br>The left side, <code>var incoming</code>, is truly optional and will often be absent.</p>
+<p>IMO, it&#39;s unfortunate that <em>yield</em> gets used for two purposes: outgoing and incoming communication.  I would have preferred something like</p>
+<pre><code class="language-javascript">
+yield outgoing  
+var incoming = resume  
+</code></pre>
+
+<p>or even  </p>
+<pre><code class="language-javascript">
+return outgoing  
+var incoming = resume  
+</code></pre>
+
+<p>which might costs one more reserved word but provide a ton of clarity.  But the ES6 usage of <code>yield</code> is consistent with several other languages.  &quot;Clever&quot; programmers can actually make the yield line very messy with more operations.  IMO it&#39;s confusing enough already, and the operator precedence is wonky, so <strong><a href="https://blog.codinghorror.com/coding-for-violent-psychopaths/">don&#39;t do that!</a></strong></p>
+<p>(<img src="/assets/svg/beaker.svg" alt="experiment" title="" /><a href="#return-in-generator"> Can I use <code>return</code> in a generator?</a>)</p>
+<h3 id="whattheheckisgoingon">What the Heck is going on?</h3>
+
+<p>Even though <code>*foo()</code> <em>looks like a function</em>, <strong>it isn&#39;t.  Proof:</strong></p>
+<pre><code class="language-javascript">
+function *foo(x) {  
+   console.log('starting foo');
+}
+
+var it=foo(0);  
+</code></pre>
+
+<p>Prints <em>nothing</em>.  It looks like you are &quot;calling&quot; foo(), but something else is happening.  &quot;Calling&quot; a generator <em>does not run the code</em> in the generator.  It produces an iterator (<em>a.k.a.</em> &quot;generator iterator&quot;) that you then use to control the generator and execute it&#39;s code.  (<img src="/assets/svg/beaker.svg" alt="experiment" title="" /><a href="#new-generator"> Can I use <code>new foo()</code> to get the iterator?</a>)</p>
+<h3 id="whatdoesyieldoutgoingdo">What does <code>yield outgoing</code> do?</h3>
+
+<p>Each &quot;yield&quot; returns the <em>result of one iteration</em>.</p>
+<h3 id="whatamiiterating">What am I iterating?</h3>
+
+<p>In the example above, not much.  However, a real generator iterates by <em>yielding</em> a result to <code>it.next()</code>.  And resumes the next time you call <code>it.next()</code>.</p>
+<p>Here&#39;s a minimal generator, returning the value you passed in:</p>
+<pre><code class="language-javascript">
+function *foo(x) {  
+   yield x;
+}
+
+var it=foo('42');  
+console.dir(it.next());  
+console.dir(it.next());  
+</code></pre>
+
+<p>The results are:</p>
+<pre><code>{ value: '42', done: false }
+{ value: undefined, done: true }
+</code></pre>
+
+<p>Here&#39;s a slightly more useful generator, iterating over a range of integers.  We use the new-fangled ES6 <code>for of</code> loop to access the values.</p>
+<pre><code class="language-javascript">
+function *foo(min, max) {  
+   while (min &lt; max)
+      yield min++;
+}
+
+for (var t of foo(0, 5))  
+   console.dir(t);
+</code></pre>
+
+<p>Which prints 0 1 2 3 4 as expected.</p>
+<h3 id="canicallanothergenerator">Can I &quot;call&quot; another generator?</h3>
+
+<p>Yes, including yourself.  <code>yield *</code> (with optional spaces in the 4 versions from above) delegates to another <em>iterable</em>.  (<img src="/assets/svg/beaker.svg" alt="experiment" title="" /><a href="#even-non-generators">do they have to be a generator?</a>)  Let&#39;s &quot;enhance&quot; our range iterator so it recurs with max-1:</p>
+<pre><code class="language-js">
+function *range_r(min, max) {  
+   while (min &lt; max)
+      yield min++;
+
+   if (max &gt; 0)  // important!
+      yield *range_r(0, max-1);
+}
+
+for (var v of range_r(0, 4))  
+   console.log(v);
+</code></pre>
+
+<p>prints:  </p>
+<pre><code>0 1 2 3 0 1 2 0 1 0  
+</code></pre>
+
+<p>If you forget that <code>if (max &gt; 0)  // important!</code> line, it will print the same results, because it is no longer yielding anything to print, but <em>generators cannot defy laws of programming:</em> the code still goes into an infinite loop and a stack overflow.</p>
+<h3 id="whatfunkystuffcanido">What funky stuff can I do?</h3>
+
+<p>You can provide an infinite iterator.  For example, for a lot of squares starting at x:</p>
+<pre><code class="language-javascript">
+function *foo(x) {  
+   while (true) {
+      yield x*x;
+      x++;
+   }
+}
+</code></pre>
+
+<p>This means that the caller has to know when to stop:</p>
+<pre><code class="language-javascript">
+var it=foo(2);  
+var t = it.next();  
+while (t.value&lt;=25) {  // stop myself  
+   console.dir(t);
+   t = it.next();
+}
+</code></pre>
+
+<p>result :  </p>
+<pre><code>
+{ value: 4, done: false }
+{ value: 9, done: false }
+{ value: 16, done: false }
+{ value: 25, done: false }
+</code></pre>
+
+<p>In theory one can also stop the iterator by calling <code>return()</code> but that didn&#39;t work for me.</p>
+<h3 id="whataboutpassingdatabacktothegenerator">What about passing data back to the Generator?</h3>
+
+<p>Here&#39;s a variation on the above, where one can (optionally) pass back in x.</p>
+<pre><code class="language-javascript">
+function *foo(x) {  
+   while (true) {
+      var newX = yield x*x;
+      x = newX || x;  // switch x to y if one was passed in
+      x++;
+   }
+}
+
+var it=foo(2);  
+console.dir(it.next());  
+console.dir(it.next());  
+console.dir(it.next(5));  
+</code></pre>
+
+<p>result:  </p>
+<pre><code>
+{ value: 4, done: false }
+{ value: 9, done: false }
+{ value: 36, done: false }
+</code></pre>
+
+<h3 id="alltheseexamplesarestandalonefunctionscaniusetheminanobjectorclass">All these examples are standalone functions.  Can I use them in an object or class?</h3>
+
+<h4 id="generatorswithinajavascriptobject">Generators within a Javascript object</h4>
+
+<p>The version 1 syntax works great with the new <a href="http://es6-features.org/#MethodProperties">ES6 concise methods</a>.  If you prefer, you can still use old fashioned function syntax - note the placement of the &quot;*&quot;.</p>
+<pre><code class="language-js">
+var foo = {  
+   max : 5,
+
+   *generator() {  // new concise syntax
+      var x = this.max;
+      while (x &gt; 0)
+         yield x--;
+   },
+
+   traditional: function*() {
+      yield *this.generator();
+   }
+};
+
+foo.max = 3;  
+for (var v of foo.generator())  
+   console.log(v);
+for (var v of foo.traditional())  
+   console.log(v);
+</code></pre>
+
+<p>prints <code>3 2 1</code> and <code>3 2 1</code>.</p>
+<h4 id="generatorswithinaprees6class">Generators within a pre-ES6 &quot;class&quot;</h4>
+
+<p>Again note the placement of the &quot;*&quot;.</p>
+<pre><code class="language-js">
+function Foo(x) {  
+   this.x = x;
+}
+
+Foo.prototype.generator = function*(){  
+   var x = this.x;
+   while (--x &gt; 0)
+      yield x;  
+};
+
+Foo.prototype.anotherGenerator = function*() {  
+   yield *this.generator();
+};
+
+var foo = new Foo(5);  
+for (var v of foo.generator())  
+   console.log(v);
+for (var v of foo.anotherGenerator())  
+   console.log(v);
+</code></pre>
+
+<p>prints <code>4 3 2 1</code> then <code>4 3 2 1</code>.</p>
+<h3 id="aregeneratorsuseful">Are Generators Useful?</h3>
+
+<p>The examples here range from useless to very slightly useful.  Surely they didn&#39;t add all this syntax just to do ranges of squares?</p>
+<p>Generators are powerful tools and I&#39;ll discuss more uses in a later post.  In the meantime, to the laboratory!</p>
+<p><br>  </p>
+<h3 id="Appendix">Appendix: Experiments</h3>  
+
+<p><br>  </p>
+<h4 id="yield-in-function"><img src="/assets/svg/beaker32.svg" alt="lab"/> Can I use <code>yield</code> in a normal function?</h4>  
+
+<p><br> <br />
+<em>No</em>.</p>
+<pre><code class="language-javascript">
+function notAGenerator() {  
+   yield 42;
+}
+
+var z = notAGenerator();  
+</code></pre>
+
+<p>Will complain:  </p>
+<pre><code>morgan@morgan-UL80Jt ~/Work/ES6 $ node test1.js  
+/home/morgan/Work/ES6/test1.js:13
+   yield 42;
+         ^^
+
+SyntaxError: Unexpected number  
+</code></pre>
+
+<p><br>  </p>
+<h4 id="return-in-generator"><img src="/assets/svg/beaker32.svg" alt="lab"/> Can I use <code>return</code> in a generator?</h4>  
+
+<p><br> <br />
+Yes, <strong>but</strong>...  </p>
+<pre><code class="language-js">
+function *foo(x) {  
+   yield x;
+   return -1;
+}
+
+var it = foo(4);  
+console.dir(it.next());  
+console.dir(it.next());  
+</code></pre>
+
+<p>prints:  </p>
+<pre><code>{ value: 4, done: false }
+{ value: -1, done: true }
+</code></pre>
+
+<p><strong>but, <code>return</code> doesn&#39;t work with <code>for..of</code> loops!</strong></p>
+<pre><code class="language-javascript">for(var v of foo(4))  
+   console.dir(v);
+</code></pre>
+
+<p>Only prints &quot;4&quot;.  <strong>Use return with extreme caution!</strong></p>
+<p><br>  </p>
+<h4 id="new-generator"><img src="/assets/svg/beaker32.svg" alt="lab"/> Can I use <code>new</code> to create the generator iterator?</h4>  
+
+<p><br> <br />
+Some <a href="https://davidwalsh.name/es6-generators">blogs that imply that you can&#39;t</a> but it works for me:</p>
+<pre><code class="language-javascript">
+function *foo(x) {  
+   yield x;
+}
+
+var it = new foo(4);  
+console.dir(it.next());  
+console.dir(it.next());  
+</code></pre>
+
+<p>prints what you expect:  </p>
+<pre><code>
+{ value: 4, done: false }
+{ value: undefined, done: true }
+</code></pre>
+
+<p><br>  </p>
+<h4 id="even-non-generators"><img src="/assets/svg/beaker32.svg" alt="lab"/> Can I yield * to a non-generator?</h4>  
+
+<p><br></p>
+<p>Yes, you can delegate to any <em>iterable</em>, such as an <strong>array</strong>, <strong>string</strong>, or <strong>Map</strong>.  (But <em>not</em> object or null!)</p>
+<pre><code class="language-js">
+function *array_string_map(array, string, map) {  
+   yield * array;
+   yield * string;
+   yield * map;
+}
+
+for (var v of array_string(  
+       [1,2,3,4],
+       'abcd',
+       new Map([ [{id: 'foo'}, 'bar'] ])
+     ))
+   console.log(v);
+</code></pre>
+
+<p>generates:  </p>
+<pre><code>
+1 2 3 4 a b c d [ { id: 'foo' }, 'bar' ]  
+</code></pre>
+
+         </div>
+      </article>
+
+   </main>
+
+   <footer id="footer">
+<nav>
+   <a class="el el-fw el-2x el-envelope" href="mailto:flyingspaniel@gmail.com" title="Email me"></a>
+   <a class="el el-fw el-2x el-phone" href="tel:+1-6504409944" title="Phone me"></a>
+   <img src="/assets/logo/snailmail.svg" width="46" height="32" alt="US Mail" title="Morgan Conrad&#013;&#010;313 Wilson St.&#013;&#010;Port Townsend WA 98368"/>
+   <a href="https://github.com/MorganConrad" class="el el-fw el-2x el-github" title="Github"></a>
+   <a href="https://www.linkedin.com/in/morganconrad" class="el el-fw el-2x el-linkedin" title="LinkedIn"></a>
+   <a href="https://flyingspaniel.com"><img src="/assets/logo/flyingspaniel.svg" width="48" height="48" alt="Business Web Site" title="Business Web Site"/></a>
+  </nav>
+   <address>&copy; 2017 Morgan Conrad.</address>
+   </footer>
+</body>
+
+</html>

@@ -1,0 +1,29 @@
+
+
+#project-figure {
+   float: right;
+   margin-right: 20px;
+}
+
+#project-figure img {
+   width: 200px;
+   height: 200px;
+}
+
+.project ul {
+   list-style: inside;
+   margin-top: 8px;
+   margin-left: 8px;
+}
+
+div.logos {
+   height: 36px;
+   margin-top: 10px;
+
+}
+
+div.logos img {
+   height: 32px;
+   margin-top: 4px;
+   margin-left:4px;
+}

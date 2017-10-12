@@ -1,10 +1,208 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Hello World</title>
-  </head>
-  <body>
-    Hello World
-  </body>
+
+<head>
+<meta charset=utf-8>
+    <title>Morgan Conrad</title>
+    <meta name="description" content="Iconic Sail and Sailboats of the Salish Sea">
+    <meta name="keywords" content = "Salish Sea, schooner, ketch, yawl">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="apple-touch-icon" sizes="192x192" href="/assets/img/mebyAudi2.png">
+    <link rel="icon" sizes="192x192" href="/assets/img/mebyAudi2.png">
+
+    <link rel="stylesheet" href="/assets/elusive_2.0.0/css/elusive-icons.min.css">
+    <!--link rel="stylesheet" href="/assets/css/octicons.css" media="screen" title="no title"-->
+
+    <style type="text/css" title="layout" media="screen">
+        @import url("/assets/css/mc.css");
+    </style>
+    
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-90305082-1', 'auto');
+  ga('send', 'pageview');
+
+  </script>
+    <link rel="stylesheet" href="/assets/css/portfolio.css">
+    <script src="/assets/js/portfolio.js"></script>
+</head>
+
+<body>
+
+   <header class="mainheader">
+
+
+      <a href="/index.html"><img src="/assets/logo/morganconrad.svg" alt="Home" title="Home"/></a>
+
+      <div class = "dropdown right">
+         <img src="/assets/svg/menu.svg" class="dropdown-btn" alt="Menu" title="Menu" height="40"/>
+         <div class="dropdown-content">
+            <a href="/index.html">Home</a>
+            <a href="/index.html#portfolio">Portfolio</a>
+            <a href="/index.html#about">About</a>
+            <a href="/index.html#contact">Contact</a>
+            <a href="/posts.html">Blog</a>
+         </div>
+      </div>
+   </header>
+
+<main>
+
+
+<section class="portfolio" id="portfolio">
+   <br>
+
+   <h2>Recent Projects</h2>
+   <!--nav id="portfolio-select">
+       <h2>Projects: </h2>
+       <ul>
+       <li id="all" onclick="portfolioShow('portfolio', 'article','');">All</li>
+       <li id="web" onclick="portfolioShow('portfolio', 'article', this.id);">Web</li>
+       <li id="science" onclick="portfolioShow('portfolio', 'article', this.id);">Science</li>
+       </ul>
+   </nav-->
+   <br><br>
+
+      <article class="project web" style="background-color:#FFFFFF;" onclick="location.href='/projects/metalsmith.html'">
+         <figure class="project-figure">
+            <img src="/assets/img/metalsmithlogo.svg" alt="metalsmith" title="metalsmith"/>
+            <!--figcaption> Four metalsmith plugins </figcaption-->
+         </figure>
+         <section class="project-desc">
+            <a href="/projects/metalsmith.html"><h3>metalsmith</h3></a>
+            <br>
+            Four <a href='http://www.metalsmith.io/'>Metalsmith</a> JS plugins.
+<ul>
+<li><a href="https://www.npmjs.com/package/metalsmith-assert">metalsmith-assert</a></li>
+<li><a href="https://www.npmjs.com/package/metalsmith-cp-r">metalsmith-cp-r</a></li>
+<li><a href="https://www.npmjs.com/package/metalsmith-inspect">metalsmith-inspect</a></li>
+<li><a href="https://www.npmjs.com/package/metalsmith-keymaster">metalsmith-keymaster</a></li>
+</ul>
+
+         </section>
+      </article>
+      <article class="project web" style="background-color:rgba(0,148,255,0.5);" onclick="location.href='/projects/iconicsails.html'">
+         <figure class="project-figure">
+            <img src="/assets/img/iconicsails.svg" alt="Iconic Sails" title="Iconic Sails"/>
+            <!--figcaption> Sailboat identification site </figcaption-->
+         </figure>
+         <section class="project-desc">
+            <a href="/projects/iconicsails.html"><h3>Iconic Sails</h3></a>
+            <br>
+            Volunteer website project for the <a href="http://nwmaritime.org/">Northwest Maritime Center</a>
+to help identify sailboats in the Salish Sea
+<br>
+<div class="logos">
+<img src='/assets/logo/HTML5.svg' alt='HTML5' title='HTML5'/>
+<img src='/assets/logo/CSS3.svg' alt='CSS3' title='CSS3'/>
+<img src='/assets/logo/JS.svg' alt='JavaScript' title='JavaScript'/>
+<img src='/assets/logo/PHP.svg' alt='PHP' title='PHP'/>
+</div>
+
+         </section>
+      </article>
+      <article class="project web" style="background-color:rgba(0,176,0,0.6);" onclick="location.href='/projects/nextq.html'">
+         <figure class="project-figure">
+            <img src="/assets/img/nextq.png" alt="NextQ" title="NextQ"/>
+            <!--figcaption> NodeJS Website for finding dog agility trials </figcaption-->
+         </figure>
+         <section class="project-desc">
+            <a href="/projects/nextq.html"><h3>NextQ</h3></a>
+            <br>
+            Node.js / Express website to find upcoming dog agility trials.
+<br>
+<div class="logos">
+<img src='/assets/logo/HTML5.svg' alt='HTML5' title='HTML5'/>
+<img src='/assets/logo/CSS3.svg' alt='CSS3' title='CSS3'/>
+<img src='/assets/logo/nodejs.svg' alt= 'nodejs' title='nodejs'/>
+<img src='/assets/logo/JS.svg' alt='JavaScript' title='JavaScript'/>
+<img src='/assets/logo/mongoDB.svg' alt='mongoDB' title='mongoDB'/>
+<img src='/assets/logo/openshift32.png' alt='OpenShift' title='OpenShift'/>
+</div>
+
+         </section>
+      </article>
+      <article class="project science" style="background-color:#FFFFFF;" onclick="location.href='/projects/fcs.html'">
+         <figure class="project-figure">
+            <img src="/assets/img/fcs.svg" alt="fcs" title="fcs"/>
+            <!--figcaption> NPM package to read FCS format data files </figcaption-->
+         </figure>
+         <section class="project-desc">
+            <a href="/projects/fcs.html"><h3>fcs</h3></a>
+            <br>
+            NPM module to read FCS 3.0 format Flow Cytometry data files
+<br>
+<div class="logos">
+<img src='/assets/logo/JS.svg' alt='JavaScript' title='JavaScript'/>
+<img src='/assets/logo/nodejs.svg' alt='nodejs' title='nodejs'/>
+<img src='/assets/logo/NPM.svg' alt='NPM' title='NPM'/>
+Flow Cytometry
+</div>
+
+         </section>
+      </article>
+</section>
+
+
+<section id="about" class="clearboth">
+
+<h2>About</h2>
+<p><br>
+I spent some 25 years developing innovative software and algorithms to acquire, analyze, display and store data from
+biotech instrumentation, mainly in Java.  <a href="#past-experience">See &quot;Past Experience&quot; below.</a></p></p>
+<p>Since the world is moving to the web, so am I, becoming conversant in
+JavaScript, Node.js, PHP and Python on the back end, and HTML5, CSS3 and JavaScript on the front end.
+Consider me a &quot;full-ish&quot; stack developer.</p>
+<p>Most of my recent projects involve acquiring (see <a href="https://www.meetup.com/BayNode/events/208388122/">BayNode Meetup talk</a>),
+distilling (see <a href="/projects/nextq.html">NextQ</a>), and integrating data (<a href="http://iconicsails.nwmaritime.org/locations.html"><em>e.g.</em> map data</a>) from outside
+sources.  I&#39;m getting pretty good at that.</p>
+<p><br></p>
+<h3 id="if-you-need-help-merging-outside-data-into-your-web-project-please-a-href-mailto-flyingspaniel-gmail-com-contact-me-a-me-">If you need help merging outside data into your web project, please <a href="mailto:flyingspaniel@gmail.com">contact me.</a> me.</h3>
+<p><h4 id="past-experience-instrumentation">Past Experience: Instrumentation</h4></p>
+<ul>
+<li><a href="https://www.thermofisher.com/us/en/home/life-science/sequencing/next-generation-sequencing/solid-next-generation-sequencing.html">DNA sequencers</a></li>
+<li><a href="https://tools.thermofisher.com/content/sfs/manuals/4308436c.pdf">Fluorescent microscope scanning assays</a></li>
+<li><a href="https://www.thermofisher.com/order/catalog/product/4376357">Real time PCR</a></li>
+<li>Flow cytometers,  <em>e.g.</em> <a href="http://www.bdbiosciences.com/us/s/flowcytometry">BD Biosciences</a>, <a href="http://www.cytekdev.com/pages/FlowJo-Collectors%27-Edition.html">Cytek Biosciences</a> and <a href="http://leukobyte.com/">Leukobyte</a></li>
+</ul>
+<p><h4 id="past-experience-applications">Past Experience: Applications</h4></p>
+<ul>
+<li><a href="https://www.google.ch/patents/US4845653">Novel methods for display of multi-parameter data</a></li>
+<li><a href="http://tools.thermofisher.com/content/sfs/brochures/cms_039789.pdf">HLA typing</a> for bone marrow transplantation</li>
+<li><a href="https://www.google.ch/patents/US6806046">HIV typing</a> for drug resistance studies.</li>
+</ul>
+<p>Most of this work was done in C or Java/Swing using desktop PCs.  I&#39;m continuing to do some contract work in these fields.</p>
+<p><h2 id="credits">Credits</h2>
+<br></p>
+<ul>
+<li>Site created with <a href="http://www.metalsmith.io/">Metalsmith</a></li>
+<li>Syntax highlighting uses <a href="http://prismjs.com/">Prism.js</a> using a modified Default theme.</li>
+<li>Many icons come from <a href="https://octicons.github.com/">Octicons</a> or <a href="http://elusiveicons.com/">Elusive Icons</a>, with some edits.</li>
+<li>The spotlight icon: &quot;<a href="https://thenounproject.com/term/spotlight/17205/">Spotlight by Moxilla from the Noun Project</a>&quot;</li>
+</ul>
+
+
+</section>
+
+
+</main>
+
+<footer id="contact">
+<nav>
+   <a class="el el-fw el-2x el-envelope" href="mailto:flyingspaniel@gmail.com" title="Email me"></a>
+   <a class="el el-fw el-2x el-phone" href="tel:+1-6504409944" title="Phone me"></a>
+   <img src="/assets/logo/snailmail.svg" width="46" height="32" alt="US Mail" title="Morgan Conrad&#013;&#010;313 Wilson St.&#013;&#010;Port Townsend WA 98368"/>
+   <a href="https://github.com/MorganConrad" class="el el-fw el-2x el-github" title="Github"></a>
+   <a href="https://www.linkedin.com/in/morganconrad" class="el el-fw el-2x el-linkedin" title="LinkedIn"></a>
+   <a href="https://flyingspaniel.com"><img src="/assets/logo/flyingspaniel.svg" width="48" height="48" alt="Business Web Site" title="Business Web Site"/></a>
+  </nav>
+   <address>&copy; 2017 Morgan Conrad.</address>
+</footer>
+
+</body>
 </html>

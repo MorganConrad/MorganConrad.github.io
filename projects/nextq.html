@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset=utf-8>
+    <title>NextQ</title>
+    <meta name="description" content="Iconic Sail and Sailboats of the Salish Sea">
+    <meta name="keywords" content = "Salish Sea, schooner, ketch, yawl">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="apple-touch-icon" sizes="192x192" href="/assets/img/mebyAudi2.png">
+    <link rel="icon" sizes="192x192" href="/assets/img/mebyAudi2.png">
+
+    <link rel="stylesheet" href="/assets/elusive_2.0.0/css/elusive-icons.min.css">
+    <!--link rel="stylesheet" href="/assets/css/octicons.css" media="screen" title="no title"-->
+
+    <style type="text/css" title="layout" media="screen">
+        @import url("/assets/css/mc.css");
+    </style>
+    
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-90305082-1', 'auto');
+  ga('send', 'pageview');
+
+  </script>
+    <link rel="stylesheet" href="/assets/css/project.css">
+</head>
+
+<body>
+
+   <header class="mainheader">
+
+
+      <a href="/index.html"><img src="/assets/logo/morganconrad.svg" alt="Home" title="Home"/></a>
+
+      <div class = "dropdown right">
+         <img src="/assets/svg/menu.svg" class="dropdown-btn" alt="Menu" title="Menu" height="40"/>
+         <div class="dropdown-content">
+            <a href="/index.html">Home</a>
+            <a href="/index.html#portfolio">Portfolio</a>
+            <a href="/index.html#about">About</a>
+            <a href="/index.html#contact">Contact</a>
+            <a href="/posts.html">Blog</a>
+         </div>
+      </div>
+   </header>
+
+   <main class="project">
+<a href="http://www.nextq.info/"><h1 class="spacer">NextQ</h1>
+
+<figure id="project-figure">
+   <img src="/assets/img/nextq.png"/>
+   <figcaption> NodeJS Website for finding dog agility trials </figcaption>
+</figure>
+</a>
+
+<br>
+<h2 id="nextq-info">NextQ.info</h2>
+<p>A website for finding upcoming <a href="https://en.wikipedia.org/wiki/Dog_agility">dog agility</a> trials in the USA.</p>
+<p>First, the user selects search criteria:</p>
+<ul>
+<li>1 to 10 states</li>
+<li>1 to 5 organizations (AKC, CPE, NADAC, UKI, or USDAA)</li>
+<li>Date range</li>
+<li>(optional) Max distance from a location</li>
+</ul>
+<p>The results are presented as a table, with the organization, show premiums, location, date, and local club.  There are links to bring up a Google Map or a <a href="https://www.bringfido.com/">BringFido</a> listing of nearby pet-friendly lodging and activities.  If desired, the user can select (&quot;like&quot;) a subset of the shows.  Results can be saved to an <a href="https://en.wikipedia.org/wiki/ICalendar">iCal</a> format or shared on social media.</p>
+<p>The backend software is a <a href="https://nodejs.org">NodeJS</a> / <a href="http://expressjs.com/">Express</a> / <a href="https://www.npmjs.com/package/jade">JADE/pug</a> / <a href="https://www.mongodb.com/">MongoDB</a> application hosted on <a href="https://www.openshift.com/">OpenShift</a>.  It makes extensive use of <a href="https://www.npmjs.com/package/request">request</a> to obtain the raw data from the organizations, and <a href="https://cheerio.js.org/">cheerio</a> to scrape their information.  MongoDB is used primarily to cache the show data.</p>
+<p>The frontend UI mainly uses HTML5 / CSS3, which pass the W3C validations.  Some JavaScript as well.  A very tiny subset of <a href="https://jquery.com/">jQuery</a> is used, primarily for <a href="http://jvectormap.com/">JVectorMap</a> to present the map of the USA.  It also uses <a href="http://www.kryogenix.org/code/browser/sorttable/">sorttable</a>.  Many user preferences are stored in HTML5 local storage.</p>
+<p><p></p>
+<div class="logos">
+<img src='/assets/logo/spotlight_uses_32.svg' alt="Uses" title="Technology used"/>
+<img src='/assets/logo/HTML5.svg' alt='HTML5' title='HTML5'/>
+<img src='/assets/logo/CSS3.svg' alt='CSS3' title='CSS3'/>
+<img src='/assets/logo/nodejs.svg' alt= 'nodejs' title='nodejs'/>
+<img src='/assets/logo/JS.svg' alt='JavaScript' title='JavaScript'/>
+<img src='/assets/logo/mongoDB.svg' alt='mongoDB' title='mongoDB'/>
+<img src='/assets/logo/openshift32.png' alt='OpenShift' title='OpenShift'/>
+</div>
+
+<p><br><br></p>
+<h3 id="screen-captures-below">Screen Captures below</h3>
+<p><br><br></p>
+<h4 id="search-page">Search Page</h4>
+<figure>
+  <img src='/assets/img/NextQ_Search.jpg' alt='Search Page' title='Search Page'/>
+  <figcaption>NextQ Search Page</figcaption>
+</figure>
+
+<p><br><br></p>
+<h4 id="results-calendar-page">Results (Calendar) Page</h4>
+<figure>
+  <img src='/assets/img/NextQ_Calendar.png' alt='Calendar Page' title='Calendar Page'/>
+  <figcaption>NextQ Result Calendar Page</figcaption>
+</figure>
+
+
+</main>
+
+<footer id="contact">
+<nav>
+   <a class="el el-fw el-2x el-envelope" href="mailto:flyingspaniel@gmail.com" title="Email me"></a>
+   <a class="el el-fw el-2x el-phone" href="tel:+1-6504409944" title="Phone me"></a>
+   <img src="/assets/logo/snailmail.svg" width="46" height="32" alt="US Mail" title="Morgan Conrad&#013;&#010;313 Wilson St.&#013;&#010;Port Townsend WA 98368"/>
+   <a href="https://github.com/MorganConrad" class="el el-fw el-2x el-github" title="Github"></a>
+   <a href="https://www.linkedin.com/in/morganconrad" class="el el-fw el-2x el-linkedin" title="LinkedIn"></a>
+   <a href="https://flyingspaniel.com"><img src="/assets/logo/flyingspaniel.svg" width="48" height="48" alt="Business Web Site" title="Business Web Site"/></a>
+  </nav>
+   <address>&copy; 2017 Morgan Conrad.</address>
+</footer>
+</body>
+</html>

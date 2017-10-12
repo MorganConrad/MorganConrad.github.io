@@ -1,0 +1,149 @@
+
+
+html {
+    position: relative;
+    min-height: 100%;
+    font-family: Lato, Helvetica, Arial, sans-serif;
+}
+
+body {
+    position: relative;
+    padding: 2px;
+    margin-left: 1em;
+
+}
+
+
+header {
+    font-size: 100%;
+    margin: 2px 0 0 0;
+}
+
+
+#about {
+   padding-top: 2em;
+}
+
+footer {
+    clear: both;
+    position: relative;
+    top: 2em;
+    padding: 4px;
+    background: gainsboro;
+    margin-top: 1em;
+}
+
+
+main {
+    clear: both;
+}
+
+
+a:visited {
+    color: blueviolet;
+}
+
+a:hover {
+    color: darkred;
+}
+
+figure {
+    margin: 0.7em;
+}
+
+figcaption {
+   margin-left: 5%;
+   font-size: 80%;
+}
+
+/*
+  Class styles
+*/
+
+
+.left {
+    float:left;
+}
+
+.right {
+    float: right;
+}
+
+.dropdown-btn  {
+   cursor: pointer;
+   border: 2px solid gray;
+}
+
+.dropdown  {
+   position: relative;
+   display: inline-block;
+}
+
+.dropdown-content {
+    margin-top: -4px;
+    display: none;
+    right: 0;
+    text-align: right;
+    position: absolute;
+    min-width: 10rem;
+    border: 2px solid gray;
+    background-color: white;
+    z-index: 99;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    padding: 0.5rem;
+    border: 1px solid lightgray;
+    text-decoration: none;
+    display: block;
+}
+
+
+.dropdown:hover .dropdown-content {
+   display: block;
+}
+
+.dropdown:active .dropdown-content {
+   display: block;
+}
+
+
+.clearboth {
+    clear: both;
+}
+
+.spacer {
+   clear: both;
+   padding-top: 3em;
+}
+
+
+#home {
+   margin : 8px 0 0 20px;
+}
+
+.intro {
+   margin-top: 1em;
+}
+
+#footer nav {
+   visibility: visible;
+}
+
+nav.portfolio {
+   display: inline-block;
+}
+article {
+   cursor: pointer;
+}
+
+i.read-more {
+   font-size: 10px;
+   margin-left: 5px;
+}
+
+code {
+   font-family: Courier, Consolas;
+   background-color: #f0f0f0;
+}
